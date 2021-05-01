@@ -21,11 +21,11 @@ class Shifts extends Model
     ];
 
     public function location(){
-        return $this->belongsTo('App\Locations');
+        return $this->belongsTo('App\Models\Locations');
     }
     
     public function guards(){
-        return $this->hasMany('App\Emp_Shifts');
+        return $this->hasMany('App\Models\Emp_Shifts');
     }
 
 

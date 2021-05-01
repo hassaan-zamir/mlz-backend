@@ -19,12 +19,12 @@ class Emp_Shifts extends Model
 
     public function getShift()
     {
-        return $this->belongsTo('App\Shifts');
+        return $this->belongsTo('App\Models\Shifts');
     }
 
     public function getGuard()
     {
-        return $this->belongsTo('App\Users');
+        return $this->belongsTo('App\Models\User');
     }
 
     use HasFactory;

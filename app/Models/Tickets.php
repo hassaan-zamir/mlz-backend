@@ -20,7 +20,7 @@ class Tickets extends Model
 
     public function location()
     {
-        return $this->belongsTo('App\Locations');
+        return $this->belongsTo('App\Models\Locations','location');
     }
 
 

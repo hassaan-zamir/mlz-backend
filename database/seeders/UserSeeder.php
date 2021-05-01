@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@mlz.com',
             'password' => Hash::make('secret'),
             'image' => asset('images/default-profile.png'),
-            'type' => 'admin'
+            'type' => 'Manager'
         ]);
 
         DB::table('users')->insert([
@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             'email' => 'client@mlz.com',
             'password' => Hash::make('secret'),
             'image' => asset('images/default-profile.png'),
-            'type' => 'client'
+            'type' => 'Client'
         ]);
 
         DB::table('users')->insert([
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'email' => 'guard@mlz.com',
             'password' => Hash::make('secret'),
             'image' => asset('images/default-profile.png'),
-            'type' => 'guard'
+            'type' => 'Guard'
         ]);
     }
 }

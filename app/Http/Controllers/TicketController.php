@@ -37,19 +37,19 @@ class TicketController extends Controller
             $to_email = $request->email;
             $subject = 'Ticket Created Succesfully';
             
-            Mail::send('emails.ticket', ['ticket' => $ticket], function($message) use ($to_name, $to_email, $subject) {
-                $message->to($to_email, $to_name)->subject($subject);
-                $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
-            });
+            try{
+                Mail::send('emails.ticket', ['ticket' => $ticket], function($message) use ($to_name, $to_email, $subject) {
+                    $message->to($to_email, $to_name)->subject($subject);
+                    $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
+                });
+            }catch(\Exception $e){
+                $ticket->delete();
+                return response('Email could not be sent',500);
+            }finally{
+                return new TicketResource($ticket);
+            }
 
-            return new TicketResource($ticket);
-            // try{
-                
-                
-            // }catch(\Exception $e){
-            //     $ticket->delete();
-            //     return response('Email could not be sent',500);
-            // }
+        
         }
         return response('Ticket could not be created', 500);
     }

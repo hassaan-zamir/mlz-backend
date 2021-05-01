@@ -15,15 +15,15 @@ class Locations extends Model
 
 
     public function client(){
-        return $this->belongsTo('App\Users');
+        return $this->belongsTo('App\Models\User','client');
     }
 
     public function tickets(){
-        return $this->hasMany('App\Tickets');
+        return $this->hasMany('App\Models\Tickets');
     }
 
     public function shifts(){
-        return $this->hasMany('App\Shifts');
+        return $this->hasMany('App\Models\Shifts');
     }
 
 
