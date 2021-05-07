@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
             'name' => 'Zafir',
             'email' => 'admin@mlz.com',
             'password' => Hash::make('secret'),
-            'image' => asset('images/default-profile.png'),
             'type' => 'Manager'
         ]);
 
@@ -23,7 +22,6 @@ class UserSeeder extends Seeder
             'name' => 'Client',
             'email' => 'client@mlz.com',
             'password' => Hash::make('secret'),
-            'image' => asset('images/default-profile.png'),
             'type' => 'Client'
         ]);
 
@@ -31,7 +29,6 @@ class UserSeeder extends Seeder
             'name' => 'Guard',
             'email' => 'guard@mlz.com',
             'password' => Hash::make('secret'),
-            'image' => asset('images/default-profile.png'),
             'type' => 'Guard'
         ]);
     }

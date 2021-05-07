@@ -13,17 +13,8 @@ class LocationController extends Controller
         return LocationResource::collection($locations);
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'client' => 'required|exists:users,id'
-        ]);
-        $location = Locations::create($request->all());
-        return new LocationResource($location);
-    }
-
     public function update($id, Request $request){
+
         $location = Locations::findOrFail($id);
         $request->validate([
             'name' => 'required',
@@ -34,9 +25,29 @@ class LocationController extends Controller
         return new LocationResource($location);
     }
 
+    public function store(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'client' => 'required|exists:users,id'
+        ]);
+        $location = Locations::create($request->all());
+        return new LocationResource($location);
+    }
+
+
+
     public function delete($id){
-        Locations::findOrFail($id)->delete();
-        return true;
+        $location = Locations::find($id);
+        if($location){
+          if($location->delete())
+            return response()->json(['status' => true, 'message' => 'location deleted successfully'],200);
+        }else{
+          return response()->json(['status' => false, 'message' => 'Location Id is invalid'],500);
+        }
+
+
+        return response()->json(['status' => false, 'message' => 'Unexpected error occured'], 500);
     }
 
 }

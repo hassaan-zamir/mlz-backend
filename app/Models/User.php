@@ -15,13 +15,10 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    protected $fillable = [ 'name', 'email', 'image', 'type', 'password'];
+    protected $fillable = [ 'name', 'email', 'type', 'password'];
 
     protected $casts = [];
 
-    public function setImageAttribute($value){
-        $this->attributes['image'] = HelperController::saveFile($value);
-    }
 
     //client relationships
     public function locations(){

@@ -9,8 +9,11 @@ Route::post('/login', [App\Http\Controllers\AuthController::class , 'login']);
 
 //Auth
 Route::middleware('auth:sanctum')->group(function() {
+
   Route::get('user', [App\Http\Controllers\AuthController::class , 'user']);
+
   Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
+
   //Get Locations
   Route::get('/locations', [App\Http\Controllers\LocationController::class, 'index']);
   //Update Locations
@@ -21,11 +24,11 @@ Route::middleware('auth:sanctum')->group(function() {
   Route::get('/locations/delete/{id}' , [App\Http\Controllers\LocationController::class , 'delete']);
 
   // View parking ticket
-  Route::post('/tickets' , [App\Http\Controllers\TicketController::class, 'store']);
-  // Add parking ticket
   Route::get('/tickets', [App\Http\Controllers\TicketController::class, 'index']);
+  // Add parking ticket
+  Route::post('/tickets' , [App\Http\Controllers\TicketController::class, 'store']);
   // Delete parking ticket
-  Route::post('/ticket/delete/{id}' , [App\Http\Controllers\TicketController::class, 'delete']);
+  Route::get('/tickets/delete/{id}' , [App\Http\Controllers\TicketController::class, 'delete']);
 
   // View shifts
   Route::get('/shifts' , [App\Http\Controllers\ShiftsController::class , 'index']);
@@ -41,10 +44,12 @@ Route::middleware('auth:sanctum')->group(function() {
   // Update report(add notes, incidents)
   Route::post('/guards/update-report/', [App\Http\Controllers\GuardsController::class , 'updateReport']);
 
+  // Get User
+  Route::get('/admin/get-users/' , [App\Http\Controllers\AdminController::class, 'getUsers'])->middleware('isAdmin');
   // Create user(guard,client)
-  Route::post('/admin/create-user/', [App\Http\Controllers\AdminController::class, 'addUser']);
+  Route::post('/admin/create-user/', [App\Http\Controllers\AdminController::class, 'addUser'])->middleware('isAdmin');
   // Update user(guard, client)
-  Route::post('/admin/update-user/{id}', [App\Http\Controllers\AdminController::class, 'updateUser']);
+  Route::post('/admin/update-user/{id}', [App\Http\Controllers\AdminController::class, 'updateUser'])->middleware('isAdmin');
   // Delete user
-  Route::get('/admin/delete-user/{id}', [App\Http\Controllers\AdminController::class, 'deleteUser']);
+  Route::get('/admin/delete-user/{id}', [App\Http\Controllers\AdminController::class, 'deleteUser'])->middleware('isAdmin');
 });

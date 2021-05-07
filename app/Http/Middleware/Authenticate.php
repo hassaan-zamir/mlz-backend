@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
+use \Illuminate\Auth\AuthenticationException;
 
 class Authenticate extends Middleware
 {
@@ -25,7 +26,13 @@ class Authenticate extends Middleware
       if($jwt = $request->cookie('jwt')){
         $request->headers->set('Authorization','Bearer '.$jwt);
       }
-      $this->authenticate($request,$guards);
-      return $next($request);
+      try{
+        $this->authenticate($request,$guards);
+        return $next($request);
+      }catch(AuthenticationException $ex){
+        return response()->json(['status' => false, 'message' => 'Unauthorized'],401);
+      }
+
+
     }
 }

@@ -16,14 +16,14 @@ class Shifts extends Model
         'notes' => 'array',
         'incidents' => 'array',
         'checklist' => 'array',
-        'start_time' => 'date:hh:mm',
-        'end_time' => 'date:hh:mm'
+        'start_time' => 'date',
+        'end_time' => 'date'
     ];
 
     public function location(){
         return $this->belongsTo('App\Models\Locations');
     }
-    
+
     public function guards(){
         return $this->hasMany('App\Models\Emp_Shifts');
     }
