@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-
+use App\Http\Resources\LocationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 
@@ -10,6 +10,7 @@ class TicketResource extends JsonResource
 
     public function toArray($request)
     {
+       
         return [
             'id' => $this->id,
             'email' => $this->email,
@@ -18,7 +19,7 @@ class TicketResource extends JsonResource
             'unit_no' => $this->unit_no,
             'license' => $this->license,
             'phone' => $this->phone,
-            'location' => $this->location()->get()->name,
+            'location' => new LocationResource($this->location()->get()[0]),
             'created_at' => $this->created_at,
         ];
     }
