@@ -43,7 +43,7 @@ class TicketController extends Controller
                 });
                 return new TicketResource($ticket);
             }catch(\Exception $e){
-                $ticket->delete();
+                // $ticket->delete();
                 return response()->json(['status' => false, 'message' => 'Email could not be sent'],500);
             }
 

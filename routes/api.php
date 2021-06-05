@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 //login
 Route::post('/login', [App\Http\Controllers\AuthController::class , 'login']);
-
+Route::post('/tickets' , [App\Http\Controllers\TicketController::class, 'store']);
+//Get Locations
+Route::get('/locations', [App\Http\Controllers\LocationController::class, 'index']);
 //Auth
 Route::middleware('auth:sanctum')->group(function() {
 
@@ -14,8 +16,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
   Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
 
-  //Get Locations
-  Route::get('/locations', [App\Http\Controllers\LocationController::class, 'index']);
+
   //Update Locations
   Route::post('/locations/update/{id}' , [App\Http\Controllers\LocationController::class, 'update']);
   //Store Location
@@ -26,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function() {
   // View parking ticket
   Route::get('/tickets', [App\Http\Controllers\TicketController::class, 'index']);
   // Add parking ticket
-  Route::post('/tickets' , [App\Http\Controllers\TicketController::class, 'store']);
+ 
   // Delete parking ticket
   Route::get('/tickets/delete/{id}' , [App\Http\Controllers\TicketController::class, 'delete']);
 
