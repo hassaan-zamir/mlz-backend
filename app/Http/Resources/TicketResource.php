@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use app\Http\Resources\LocationResource;
+
 
 class TicketResource extends JsonResource
 {
@@ -18,7 +18,7 @@ class TicketResource extends JsonResource
             'unit_no' => $this->unit_no,
             'license' => $this->license,
             'phone' => $this->phone,
-            'location' => new LocationResource($this->location()),
+            'location' => $this->location()->name,
             'created_at' => $this->created_at,
         ];
     }
